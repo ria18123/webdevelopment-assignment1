@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Form Validation - Experiment 4</title>
- 
-  <link rel="stylesheet" href="style.css">
-  <script src="scripts.js"></script>
-   <script src="main.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" media="screen and (max-width:991px)" href="style.css"/>
+     <script src="main.js" defer></script>
+    <title>Contact me</title>
 </head>
 <body>
-  <header class="header">
+   <header class="header">
       <div class="menu-btn">
         <div class="menu-btn__lines"></div>
       </div>
@@ -18,34 +21,62 @@
         <li><a href="Portfolio.html" class="menu-item">Portfolio</a></li>
         <li><a href="Blog.html" class="menu-item">Blog</a></li>
         <li><a href="report.html" class="menu-item">Report</a></li>
-        <li><a href="Contact.html" class="menu-item">Contact</a></li>
+        <li><a href="contact.html" class="menu-item">Contact</a></li>
       </ul>
     </header>
+    <!--contact section start-->
+     <section class="contact" >
+       <div class="content">
+         <h2>CONTACT ME</h2>
+        </div>
+        <div class="container-c">
+        <div class="contactInfo">
+           <div class="box-x">
+             <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="text">
+                <h3>Adress</h3>
+                <p> gokarneshwor-2,kathmandu </p>
+               </div>
+           </div>
+             <div class="box-x">
+              <div class="icon"><i class="fas fa-phone"></i></div>
+               <div class="text">
+                <h3>phone</h3>
+                <p>9844591296</p>
+               </div>
+           </div>
+              <div class="box-x">
+               <div class="icon"><i class="fas fa-envelope"></i></div>
+                <div class="text">
+                <h3>Email</h3>
+                <p>shrestharia08@gmail.com</p>
+               </div>
+          </div>
+      </div>
 
-<div class="wrapper_contact">
-  <h2>Contact page</h2>
-  <div id="error_message"></div>
-  <form id="myform" onsubmit="return validate();">
-    <div class="input_field">
-        <input type="text" placeholder="Name" id="name">
+       <div class="contact-form">
+        <form>
+            <h2>Send Message</h2>
+            <div class="inputbox">
+                <input type="text" name="type=hidden" required="required">
+                <span>FULL NAME</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="type=hidden" required="required">
+                <span>Email</span>
+            </div>
+            <div class="inputbox">
+                <textarea required="required"></textarea>
+                <span>Type your message...</span>
+            </div>
+            <div class="inputbox">
+                <input type="submit" name="type=hidden" value="send" >
+            </div>
+        </form>
     </div>
-    <div class="input_field">
-        <input type="text" placeholder="Adress" id="Adress">
     </div>
-    <div class="input_field">
-        <input type="text" placeholder="Phone" id="phone">
-    </div>
-    <div class="input_field">
-        <input type="text" placeholder="Email" id="email">
-    </div>
-    <div class="input_field">
-        <textarea placeholder="Message" id="message"></textarea>
-    </div>
-    <div class="btn">
-        <input type="submit">
-    </div>
-  </form>
-</div>
-
+   <!--contact section end-->
+     
+</section>
 </body>
 </html>
