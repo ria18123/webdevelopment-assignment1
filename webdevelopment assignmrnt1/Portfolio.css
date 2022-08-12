@@ -1,5 +1,4 @@
 /* globals */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Titillium+Web:wght@400;700&display=swap");
 
 * {
   margin: 0;
@@ -69,7 +68,7 @@ body {
 .menu-btn__lines::before,
 .menu-btn__lines::after {
   content: "";
-  position: absolute;
+  position: fixed;
 }
 .menu-btn__lines::before {
   transform: translateY(-0.5rem);
@@ -141,7 +140,7 @@ body {
 }
 .main-content .box::before{
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 5px;
@@ -159,7 +158,7 @@ body {
     object-fit: cover;
 }
 .main-content .box .img-text {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -208,7 +207,7 @@ body {
   .menu-items {
     flex-direction: column;
     justify-content: space-around;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;

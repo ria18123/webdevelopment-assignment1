@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CONTACT ME</title>
- 
+ <!-- links -->
   <link rel="stylesheet" href="style.css">
   <script src="scripts.js"></script>
    <script src="main.js" defer></script>
+   <!-- Title -->
+   <title>CONTACT ME</title>
 </head>
 <body>
+   <!-- header for the home page -->
   <header class="header">
       <div class="menu-btn">
         <div class="menu-btn__lines"></div>
       </div>
+       <!-- menu items with link for the subpages -->
       <ul class="menu-items">
         <li><a href="index.html" class="menu-item">Home</a></li>
         <li><a href="Portfolio.html" class="menu-item">Portfolio</a></li>
@@ -22,8 +25,10 @@
       </ul>
     </header>
 
+<!-- wrapper containing contact form section  -->
 <div class="wrapper_contact">
-  <h2>Contact me</h2>
+  <!-- title of the contact form -->
+  <h2>CONTACT ME</h2>
   <div id="error_message"></div>
   <form id="myform" onsubmit="return validate();">
     <div class="input_field">
@@ -41,6 +46,7 @@
     <div class="input_field">
         <textarea placeholder="Message" id="message"></textarea>
     </div>
+    <!-- button for the contact form -->
     <div class="btn">
         <input type="submit">
     </div>

@@ -1,3 +1,4 @@
+// javascrippt for the contact me page
 function validate(){
   var name = document.getElementById("name").value;
   var subject = document.getElementById("subject").value;
