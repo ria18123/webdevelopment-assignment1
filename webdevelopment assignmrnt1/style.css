@@ -90,7 +90,7 @@ body {
 .menu-btn__lines::before,
 .menu-btn__lines::after {
   content: "";
-  position: absolute;
+  position: fixed;
 }
 .menu-btn__lines::before {
   transform: translateY(-0.5rem);
@@ -121,6 +121,7 @@ body {
   margin-left: 65px;
 }
 
+/* automatically generating and disappearing welcome text */
 .text-dynamic {
   margin-left: 30px;
   line-height: 90px;
@@ -139,7 +140,7 @@ body {
 }
 
 .text-item::after {
-  position: absolute;
+  position: fixed;
   content: '';
   left: 0;
   height: 100%;
@@ -344,7 +345,7 @@ body {
 /* before hover effect */
 .main-content .box::before{
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 5px;
@@ -368,7 +369,7 @@ body {
 
 /* text inside the box */
 .main-content .box .img-text {
-    position: absolute;
+    position: relative ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -398,7 +399,7 @@ body{
 
 /* wrapper for the contact page*/
 .wrapper_contact{
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
@@ -601,13 +602,6 @@ h2{
   margin-bottom: 45px;
 }
 
-/*centering the title text*/
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 /* Creating two columns for the blog */
 
@@ -832,8 +826,8 @@ h2{
 
 /* inputbox span */
 .contact-form .inputbox span{
-  position: absolute;
-  left: 0;
+  position: fixed;
+  left: 57%;
   padding: 5px 0;
   font-size: 16px;
   margin: 10px 0;
@@ -919,7 +913,7 @@ h2{
   .menu-items {
     flex-direction: column;
     justify-content: space-around;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
