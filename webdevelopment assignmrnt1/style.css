@@ -18,19 +18,19 @@
   box-sizing: border-box;
 }
 
+/* body of the website */
 body {
   font-family: Monterrat, sans-serif;
   height: 100vh;
  justify-content: center;
   align-items: center;
-  
   width: 100%;
   height: 100vh;
   overflow: hidden auto;
 
 }
 
-/* header */
+/* header for the website */
 .header {
   position: fixed;
   top: 0;
@@ -49,6 +49,7 @@ body {
   font-size: 2rem;
 }
 
+/* The list of subpages in the menu*/
 .menu-items {
   list-style: none;
   display: flex;
@@ -65,7 +66,7 @@ body {
   background-color: #fcd68b;
 }
 
-/* nav menu button */
+/* navigation buttons for the menu */
 .menu-btn {
   position: relative;
   display: none;
@@ -76,6 +77,8 @@ body {
   cursor: pointer;
   z-index: 1;
 }
+
+/* hamburger icon lines */
 .menu-btn__lines,
 .menu-btn__lines::before,
 .menu-btn__lines::after {
@@ -109,7 +112,8 @@ body {
   transform: rotate(-45deg) translate(-1.5rem, -1.5rem);
   background-color: #ffffff;
 }
-/*home section begins*/
+
+/*home section or the index section begins*/
 .text-wrapper {
   display: flex;
   font-size: 60px;
@@ -159,10 +163,13 @@ body {
   }
 }
 
+/* background for the homepage*/
 .parallax1 {
     background-image: url(img/New\ sun.jpg);
     min-height: 100%;
 }
+
+/* second welcome text for webpage*/
 .welcome-text a {
   border: 0px solid #000;
   padding: 10px 25px;
@@ -184,7 +191,7 @@ body {
                0 0 100PX #009D99; 
 }
 
-
+/* background for home page */
 .parallax1{
     position: relative;
     opacity: 0.93;
@@ -194,6 +201,7 @@ body {
     background-attachment: fixed; /*Important*/
 }
 
+/* first welcome text */
 .head {
     position: fixed;
     color: #fff;
@@ -218,6 +226,8 @@ body {
   margin-left: 120px;
   font-size: 40px;
 }
+
+/* second welcome text  */
 .text-dynamic {
   margin-left: 30px;
   line-height: 90px;
@@ -259,24 +269,28 @@ body {
     }
  .welcome-text a{
    bottom: 28%;
-   left: 210px;
+   left: 250px;
   }
   .head{
         font-size: 300%;
-        left: 20%;
+        left: 25%;
     }
    
 }
 
-/*home section ends */
+/* The home section ends */
 
-/* Extracuricular page begins */
+
+
+/* Portfolio page begins */
 .wrapper{
     width: 80%;
     padding: 30px 0;
     margin: auto;
     text-align: center;
 }
+
+/* contains the title porfolio*/
 .section-header{
     text-transform: uppercase;
     line-height: 100px;
@@ -287,10 +301,13 @@ body {
     margin: auto;
     
 }
+
+/* slider for the box */
 .content {
   padding: 10%;
 }
 
+/* text of the slider */
 .content h2 {
   font-size: 30px;
   text-transform: uppercase;
@@ -299,6 +316,8 @@ body {
 .content p {
   line-height: 1.5;
 }
+
+/* grid system of the portfolio*/
 .main-content{
     width: 100%;
     display: grid;
@@ -310,6 +329,8 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 }
+
+/* individual box inside grid*/
 .main-content .box{
     position: relative;
     cursor: pointer;
@@ -319,6 +340,8 @@ body {
     border-radius: 0.5rem;
     overflow: hidden;    
 }
+
+/* before hover effect */
 .main-content .box::before{
     content: '';
     position: absolute;
@@ -328,16 +351,22 @@ body {
     height: 100%;
     transition: all 0.3s ease-in-out;
 }
+
+/* hover effect after */
 .main-content .box:hover:before{
     top: 0;
     right: calc(100% - 5px);
     z-index: 10;
 }
+
+/* dummy image for the individual boxes*/
 .main-content .box img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
+/* text inside the box */
 .main-content .box .img-text {
     position: absolute;
     display: flex;
@@ -350,18 +379,24 @@ body {
     right: 100%;
     transition: all 0.5s ease-in-out;   
 }
+
+/* image text when hovering*/
 .main-content .box:hover .img-text{
     top: 0;
     right: 0;
 }
 
-/* Extracuricular page ends */
+/* Portfolio page ends */
 
-/*contact me page begin*/
+
+/*CONTACT ME page begin*/
+
+/* background color for the website */
 body{
   background: #517a8b;
 }
 
+/* wrapper for the contact page*/
 .wrapper_contact{
   position: absolute;
   top: 50%;
@@ -375,6 +410,7 @@ body{
   box-shadow: 4px 4px 2px rgba(254,236,164,1); 
 }
 
+/* title for the contact me page*/
 .wrapper_contact h2{
   text-align: center;
   margin-bottom: 20px;
@@ -384,10 +420,12 @@ body{
   margin-left: 50px;
 }
 
+/* place to input information*/
 .wrapper_contact .input_field{
   margin-bottom: 10px;
 }
 
+/*input text area */
 .wrapper_contact .input_field input[type="text"],
 .wrapper_contact textarea{
   border: 1px solid #e0e0e0;
@@ -400,6 +438,7 @@ body{
   height: 80px;
 }
 
+/* submit button of the contact form */
 .wrapper_contact .btn input[type="submit"]{
   border: 0px;
   margin-top: 15px;
@@ -415,6 +454,7 @@ body{
   cursor: pointer;
 }
 
+/* message when an error occurs */
 #error_message{
   margin-bottom: 20px;
   background: #fe8b8e;
@@ -426,24 +466,11 @@ body{
 /*contact me page end*/
 
 
-/* report starts */
 
-}
-.header-left {
-    display: grid;
-    align-items: center;
-    font-size: 2rem;
-}
 
-.header-right{
-    width: 100%;
-    display: grid;
-    justify-items: end;
-}
-.header-right p{
-    display: inline;
-}
+/* Report page starts */
 
+/* color for the margins containg title */
 .blue{
     background:#173e43;
     color:#fff;
@@ -452,18 +479,19 @@ body{
     margin-bottom: 8px;
 }
 
-
-
 @media (max-width:767px){
  .header-right{
     font-size: 11px;
   }
 }
+/* section containing the report part */
 .section_report{
   margin-top: 70px;
   opacity: auto;
   padding-bottom: 40px;
 }
+
+/* Title of the reort */
 h1{
     margin: 0 auto;
     text-align: right;
@@ -471,11 +499,15 @@ h1{
     font-weight: 500;
     margin-bottom: 10px;
 }
+
+/* Title inside the margin containing the titles */
 h2{
     margin: 0;
     font-weight: 400;
     display: inline-block;
 }
+
+/* box of the report */
 .box-r{
     background: #fff;
     width: 50rem;
@@ -484,14 +516,18 @@ h2{
     border-radius: 0.5rem;
     background: rgb(240, 239, 239);
 }
+
+/* header containing title */
 .header-r{
     display: grid;
     grid-template-columns: 40% 60%;
 }
+
+/* images for the various subpages */
 .img-index{
   width: 600px;
 }
-.img-cv{
+.img-blog{
   width: 600px;
 }
 .img-portfolio{
@@ -504,6 +540,7 @@ h2{
   width: 600px;
 }
 
+/* Responsive */
 @media (max-width:760px){
 
   h1 {
@@ -541,20 +578,21 @@ h2{
       width: 250px;
     }
 }
-/* report ends */
+/* Report page ends */
 
 /* Blog begins */
 
+/*borderboxing*/
 * {
   box-sizing: border-box;
 }
 
-/* Add a gray background color with some padding */
-
-/* Header/Blog Title */
+/* Title of the blog */
 .blog{
   padding: 20px;
 }
+
+/* header of the plog containing image */
 .header_B {
   position: relative;
   text-align: center;
@@ -563,6 +601,7 @@ h2{
   margin-bottom: 45px;
 }
 
+/*centering the title text*/
 .centered {
   position: absolute;
   top: 50%;
@@ -570,43 +609,45 @@ h2{
   transform: translate(-50%, -50%);
 }
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
+/* Creating two columns for the blog */
+
+/* Column left */
 .leftcolumn {   
   float: left;
   width: 75%;
 }
 
-
-/* Right column */
+/* Column right */
 .rightcolumn {
   float: left;
   width: 25%;
   padding-left: 20px;
 }
 
-/* Fake image */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-}
-
-/* Add a card effect for articles */
+/* Adding the effect of cards for the articles in the blog */
 .card {
    background-color: white;
    padding: 20px;
    margin-top: 20px;
+   border-radius: 0.5rem;
 }
+
+/* Title of the artile */
 .card h2 {
   padding: 4px;
 }
+
+/* text below the article title */
 .card h5 {
   padding: 4px;
 }
+
+/* About me text */
 .card h3 {
   padding: 4px;
 }
+
+/*Image of the articles*/
 .header_Row {
   position: relative;
   text-align: center;
@@ -615,21 +656,23 @@ h2{
   margin-bottom: 45px;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* Footer */
+/* footer of the blog page */
 .footer {
   padding: 20px;
   text-align: center;
   background: #fff;
   margin-top: 20px;
   opacity: 0.7;
+  border-radius: 0.5rem;
 }
+
+/* Icons for the follow me part */
 .fa {
   padding: 20px;
   font-size: 30px;
@@ -640,10 +683,12 @@ h2{
   border-radius: 50%;
 }
 
+/* hover effect */
 .fa:hover {
     opacity: 0.7;
 }
 
+/* Icons */
 .fa-facebook {
   background: #3B5998;
   color: white;
@@ -662,7 +707,7 @@ h2{
   color: white;
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+/* Responsive  */
 @media screen and (max-width: 800px) {
   .leftcolumn, .rightcolumn {   
     width: 100%;
@@ -670,10 +715,13 @@ h2{
   }
 }
 
+/*Blog page ends */
 
-/*Blog ends */
+
 
 /* contact page start */
+
+/* section containing contact form and info */
 .contact {
   position: relative;
   height: 80vh;
@@ -683,16 +731,22 @@ h2{
   align-items: center;
   flex-direction: column;
 }
+
+/* Title of the contact page */
 .contact .content{
   max-width: 800px;
   padding-bottom: 50px;
   padding-right: 200px;
 }
+
+/* text for the title of contact page */
 .contact .content h2{
   font-size: 36px;
   font-weight: 500;
   color: #fff;
 }
+
+/* container for the contact form and info */
 .container-c{
     width: 100%;
     display: flex;
@@ -700,17 +754,22 @@ h2{
     align-items: center;
     margin-top: 30px;
 }
+
+/* contact information */
 .container-c .contactInfo{
   width: 50%;
   display: flex;
   flex-direction: column;
 }
+/* contact info box */
 .container-c .contactInfo .box-x{
   position: relative;
   padding: 20px 0;
   display: flex;
   color: white;
 }
+
+/* Icon of the contact info */
 .container-c .contactInfo .box-x .icon{
   min-width: 60px;
   height: 60px;
@@ -721,6 +780,8 @@ h2{
   font-size: 22px;
   color: white;
 }
+
+/* text inside the contact info */
 .container-c .contactInfo .box-x .text{
   display: flex;
   margin-left: 20px;
@@ -729,10 +790,13 @@ h2{
   flex-direction: column;
   font-weight: 300;
 }
+
 .container-c .contactInfo .box-x .text h3{
   font-weight: 500;
   color: #073245;
 }
+
+/* The form for the contact page */
 .contact-form{
   width: 40%;
   padding: 40px;
@@ -740,11 +804,15 @@ h2{
   border-radius: 0.5rem;
   opacity: 0.8;
 }
+
+/* Title of the contact form */
 .contact-form h2{
   font-size: 30px;
   color: #333;
   font-weight: 500;
 }
+
+/* inputbox to insert information */
 .contact-form .inputbox{
   position: relative;
   width: 100%;
@@ -761,6 +829,8 @@ h2{
   outline: none;
   resize: none;
 }
+
+/* inputbox span */
 .contact-form .inputbox span{
   position: absolute;
   left: 0;
@@ -779,6 +849,8 @@ h2{
   font-size: 12px;
   transform: translateY(-20px);
 }
+
+/* submit button of the contact form */
 .contact-form .inputbox input[type="submit"]{
   width: 100px;
   background: #173e43;
@@ -788,6 +860,8 @@ h2{
   padding: 10px;
   font-size: 18px;
 }
+
+/* Responsive */
 @media (max-width: 991px){
   .contact .content{
     padding-right: 58px;
@@ -812,7 +886,9 @@ h2{
 
 /* contact page end */
 
-/* media query for tablet devices */
+/* Responsive for the menu  */
+
+/* For tablet devices */
 @media (max-width: 1023px) {
   .custom-shape-divider svg {
     width: calc(200% + 1.3px);
@@ -828,7 +904,7 @@ h2{
   }
 }
 
-/* media query for mobile devices */
+/* For mobile devices */
 @media (max-width: 767px) {
   .custom-shape-divider svg {
     width: calc(250% + 1.3px);
