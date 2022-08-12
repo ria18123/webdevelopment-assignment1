@@ -544,99 +544,130 @@ h2{
 /* report ends */
 
 /* Blog begins */
-}
-.header-left {
-    display: grid;
-    align-items: center;
-    font-size: 2rem;
+
+* {
+  box-sizing: border-box;
 }
 
-.header-right{
+/* Add a gray background color with some padding */
+
+/* Header/Blog Title */
+.blog{
+  padding: 20px;
+}
+.header_B {
+  position: relative;
+  text-align: center;
+  color: white;
+  top: 50px;
+  margin-bottom: 45px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+.card h2 {
+  padding: 4px;
+}
+.card h5 {
+  padding: 4px;
+}
+.card h3 {
+  padding: 4px;
+}
+.header_Row {
+  position: relative;
+  text-align: center;
+  color: white;
+  top: 25px;
+  margin-bottom: 45px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  margin-top: 20px;
+  opacity: 0.7;
+}
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 70px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
     width: 100%;
-    display: grid;
-    justify-items: end;
-}
-.header-right p{
-    display: inline;
-}
-
-.green{
-    background:#173e43;
-    color:#fff;
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-    margin-bottom: 8px;
-}
-@media (max-width:767px){
- .header-right{
-    font-size: 11px;
+    padding: 0;
   }
-}
-.section_blog{
-  margin-top: 70px;
-  opacity: auto;
-  padding-bottom: 40px;
-}
-h1{
-    margin: 0 auto;
-    text-align: right;
-    width: 390px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-h2{
-    margin: 0;
-    font-weight: 400;
-    display: inline-block;
-}
-.box-b{
-    background: #fff;
-    width: 50rem;
-    padding: 3rem;
-    margin: 1rem auto;
-    border-radius: 0.5rem;
-    background: rgb(240, 239, 239);
-}
-.header-b{
-    display: grid;
-    grid-template-columns: 40% 60%;
-}
-
-
-@media (max-width:760px){
-
-  h1 {
-    margin: 0 auto;
-    text-align: right;
-    width: 220px;
-    font-weight: 500;
-    margin-bottom: 10px
-  }
-  .section_blog{
-    overflow: hidden;
-    padding-bottom: 30px;
-}
-  .box-b{
-    width: 15rem;
-    margin-top: 10px;
-    padding: 1.5rem;
-    width: 370px;
-  }
-  .img-index{
-      width: 250px;
-    }
-    .img-blog{
-      width: 250px;
-    }
-    .img-portfolio{
-      width: 250px;
-    }
-    .img-call{
-      width: 250px;
-    }
-    .img-prob{
-      width: 250px;
-    }
 }
 
 
