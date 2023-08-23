@@ -23,7 +23,7 @@ if (isset($_GET['name'])) {
     $deleteAuctionStmt->execute(['auctionName' => $auctionName]);
 
     // Redirect back to the auctions list page
-    header('Location: admin_panel.php'); // Change this to the appropriate page
+    header('Location: Auctions.php'); // Change this to the appropriate page
     exit();
 } else {
     echo 'Invalid request';

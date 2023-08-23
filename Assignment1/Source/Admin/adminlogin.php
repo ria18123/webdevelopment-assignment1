@@ -133,8 +133,8 @@ if (isset($_POST['submit'])) {
         <ul>
             <!-- List of navigation links -->
             <li><a href="adminlogin.php">Admin Dashboard</a></li>
-            <li><a href="adminlogin.php">Auctions</a></li>
             <li><a href="adminlogin.php">Categories</a></li>
+            <li><a href="adminlogin.php">Auctions</a></li>
             <li><a href="/Logout.php">Logout</a></li>
         </ul>
     </nav>

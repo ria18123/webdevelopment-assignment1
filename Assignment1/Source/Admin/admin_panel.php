@@ -145,10 +145,9 @@ require('../dataconnection/configuration.php');// Include the database configura
     <nav>
         <ul>
             <!-- List of navigation links -->
-        <li><a href="/index.php">Home</a></li>
             <li><a href="admin_panel.php">Admin Dashboard</a></li>
-            <li><a href="Auctions.php">Auctions</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
             <li><a href="/Logout.php">Logout</a></li>
         </ul>
     </nav>
@@ -160,8 +159,8 @@ require('../dataconnection/configuration.php');// Include the database configura
         <section class="left">
             <ul>
                 <!-- Additional navigation links for this section -->
-            <li><a href="Auctions.php">Auctions</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
             </ul>
         </section>
          <!-- Right sidebar section for main content -->

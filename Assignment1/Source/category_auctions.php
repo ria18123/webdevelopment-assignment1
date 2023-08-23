@@ -9,7 +9,18 @@ if (!isset($_SESSION['user'])) {
 }
 
 require('dataconnection/configuration.php'); // Connecting to the database
+
+// Retrieve the category name from the URL parameter
+$categoryName = $_GET['category'];
+
+// Fetch auctions of the selected category
+$sql = "SELECT * FROM auctions WHERE categoryName = :categoryName ORDER BY auctionDate DESC";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':categoryName', $categoryName, PDO::PARAM_STR);
+$stmt->execute();
+$auctions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -57,19 +68,15 @@ header form input[type="text"] {
 .dropdown-content li {
         padding: 8px;
     }
-    .remaining-time {
-            font-size: 0.9em;
-            color: red; /* Choose a suitable color for the remaining time */
-        }
     </style>
 	<body>
 		<header>
 			<h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
 
-            <form action="browse_products.php" method="get"> <!-- Change the action URL to your browse_products.php script -->
-        <input type="text" name="search" placeholder="Search for anything" />
-        <input type="submit" name="submit" value="Search" />
-    </form>
+			<form action="#">
+				<input type="text" name="search" placeholder="Search for anything" />
+				<input type="submit" name="submit" value="Search" />
+			</form>
 		</header>
 
         <nav>
@@ -111,26 +118,19 @@ header form input[type="text"] {
     </nav>
 
     <img src="banners/1.jpg" alt="Banner" />
-
+   
     <main>
-        <h1>Latest Listings </h1>
+        <h1><?php echo $categoryName; ?> Auctions</h1>
 
-        <ul class="productList">
         <ul class="productList">
             <?php
-            // Fetch the most recent 10 auctions
-            $sql = "SELECT * FROM auctions ORDER BY auctionDate DESC LIMIT 10";
-            $stmt = $pdo->query($sql);
-
-            $currentTimestamp = time(); // Get the current timestamp
-
-            while ($auction = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            foreach ($auctions as $auction) {
                 echo '<li>';
                 echo '<img src="product.png" alt="' . $auction['auction_name'] . '">';
                 echo '<article>';
                 echo '<h2>' . $auction['auction_name'] . '</h2>';
                 echo '<h3>' . getCategoryName($auction['categoryName'], $pdo) . '</h3>';
-
+                
                 // Shorten the description if it's too long
                 $description = $auction['Description'];
                 $maxDescriptionLength = 60; // Set your desired maximum description length
@@ -140,92 +140,46 @@ header form input[type="text"] {
                 } else {
                     echo '<p>' . $description . '</p>';
                 }
-
+            
                 // Use the getCurrentBidAmount function to display the current bid
                 $currentBid = getCurrentBidAmount($auction['auction_name'], $pdo);
                 echo '<p class="price">Current bid: £' . $currentBid . '</p>';
-
-                // Calculate remaining time
-                $auctionEndTime = strtotime($auction['auction_end_time']); // Convert end time to timestamp
-                $remainingTime = $auctionEndTime - $currentTimestamp; // Calculate remaining time in seconds
-
-                $days = floor($remainingTime / (60 * 60 * 24));
-                $hours = floor(($remainingTime % (60 * 60 * 24)) / (60 * 60));
-                $minutes = floor(($remainingTime % (60 * 60)) / 60);
-                $seconds = $remainingTime % 60;
-
-                echo '<p class="remaining-time">';
-                echo 'Remaining Time: ' . $days . 'd ' . $hours . 'h ' . $minutes . 'm ' . $seconds . 's';
-                echo '</p>';
-
+            
                 echo '<a href="auction_details.php?auction_name=' . $auction['auction_name'] . '" class="more auctionLink">More &gt;&gt;</a>';
                 echo '</article>';
                 echo '</li>';
             }
-        
+            
+            // Function to fetch category name based on categoryID
+            function getCategoryName($categoryID, $pdo) {
+                $query = "SELECT categoryName FROM categories WHERE categoryName = :categoryID";
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(':categoryID', $categoryID, PDO::PARAM_STR);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $result['categoryName'];
+            }
+            
+            // Function to fetch the current bid amount for an auction
+            function getCurrentBidAmount($auctionName, $pdo) {
+                $query = "SELECT MAX(bidAmount) AS currentBid FROM bids WHERE auction_name = :auctionName";
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(':auctionName', $auctionName, PDO::PARAM_STR);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Modify the getCurrentBidAmount function to handle the case when there are no bids yet
-function getCurrentBidAmount($auctionName, $pdo) {
-    $query = "SELECT MAX(bidAmount) AS currentBid FROM bids WHERE auction_name = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$auctionName]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($result['currentBid'] !== null) {
-        return number_format($result['currentBid'], 2);
-    } else {
-        return 'No bids yet';
-    }
-}
-
-// Modify the getCategoryName function to return the category name or a default value
-function getCategoryName($categoryID, $pdo) {
-    $query = "SELECT categoryName FROM categories WHERE categoryName = ?";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([$categoryID]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if ($result) {
-        return $result['categoryName'];
-    } else {
-        return 'Unknown Category'; // Return a default value if category is not found
-    }
-}
-
+                if ($result['currentBid']) {
+                    return $result['currentBid'];
+                } else {
+                    return 'No bids yet';
+                }
+            }
             ?>
         </ul>
-
-		
 
         <footer>
             &copy; ibuy <?php echo date("Y"); ?> <!-- Display the current year dynamically -->
         </footer>
 		</main>
-        <!-- JavaScript to handle dropdown functionality -->
-<!-- JavaScript to handle dropdown functionality -->
-<script>
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownContent = document.querySelector('.dropdown-content');
-
-    // Show dropdown content on hover
-    dropdown.addEventListener('mouseover', () => {
-        dropdownContent.style.display = 'block';
-    });
-
-    // Hide dropdown content when mouse leaves the entire dropdown
-    dropdown.addEventListener('mouseout', () => {
-        dropdownContent.style.display = 'none';
-    });
-
-    // Prevent hiding when moving from link to dropdown content
-    dropdownContent.addEventListener('mouseover', () => {
-        dropdownContent.style.display = 'block';
-    });
-
-    // Hide dropdown content when mouse leaves the dropdown content
-    dropdownContent.addEventListener('mouseout', () => {
-        dropdownContent.style.display = 'none';
-    });
-</script>
-	</body>
+</body>
 </html>

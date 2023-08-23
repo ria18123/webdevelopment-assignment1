@@ -193,9 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Navigation menu -->
     <nav>
         <ul>
-            <li><a href="admin_panel.php">Home</a></li>
-            <li><a href="/">Auctions</a></li>
+            <li><a href="admin_panel.php">Admin Dashboard</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
         </ul>
     </nav>
     <!-- Banner image -->
@@ -206,9 +206,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Left sidebar section with navigation links -->
         <section class="left">
             <ul>
+            <li><a href="Auctions.php">Auctions</a></li>
                 <li><a href="addauction.php">Add Auction</a></li>
-                <li><a href="editauction.php">Edit Auction</a></li>
-                <li><a href="deleteauction.php">Delete Auction</a></li>
             </ul>
         </section>
         <!-- Right sidebar section for adding an auction -->

@@ -152,9 +152,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Navigation section -->
     <nav>
         <ul>
-            <li><a href="admin_panel.php">Home</a></li>
-            <li><a href="/">Auctions</a></li>
+            <li><a href="admin_panel.php">Admin Dashboard</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
         </ul>
     </nav>
     

@@ -8,14 +8,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newName = $_POST['new_name'];
         $newCategory = $_POST['new_category'];
         $newDescription = $_POST['new_description'];
+        $newAuctionDate = $_POST['new_auctionDate']; // New auctionDate value
+        $newAuctionEndTime = $_POST['new_auction_end_time']; // New auction_end_time value
 
         // Delete associated bids
         $deleteBidsStmt = $pdo->prepare('DELETE FROM bids WHERE auction_name = :auctionName');
         $deleteBidsStmt->execute(['auctionName' => $auctionName]);
 
-        // Update the auction's name, category, and description
-        $updateStmt = $pdo->prepare('UPDATE auctions SET auction_name = :newName, categoryID = :newCategory, Description = :newDescription WHERE auction_name = :auctionName');
-        $updateStmt->execute(['newName' => $newName, 'newCategory' => $newCategory, 'newDescription' => $newDescription, 'auctionName' => $auctionName]);
+        // Update the auction's name, category, description, auctionDate, and auction_end_time
+        $updateStmt = $pdo->prepare('UPDATE auctions SET auction_name = :newName, categoryName = :newCategory, Description = :newDescription, auctionDate = :newAuctionDate, auction_end_time = :newAuctionEndTime WHERE auction_name = :auctionName');
+        $updateStmt->execute([
+            'newName' => $newName,
+            'newCategory' => $newCategory,
+            'newDescription' => $newDescription,
+            'newAuctionDate' => $newAuctionDate,
+            'newAuctionEndTime' => $newAuctionEndTime,
+            'auctionName' => $auctionName
+        ]);
 
         // Display a success message
         echo '<div class="message">Auction details updated successfully</div>';
@@ -214,9 +223,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Navigation section -->
     <nav>
         <ul>
-            <li><a href="admin_panel.php">Home</a></li>
-            <li><a href="/">Auctions</a></li>
+            <li><a href="admin_panel.php">Admin Dashboard</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
         </ul>
     </nav>
     
@@ -237,39 +246,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="right">
             <h2>Edit Auction</h2>
             <?php
-            if (isset($_GET['name'])) {
-                $auctionName = $_GET['name'];
+    if (isset($_GET['name'])) {
+        $auctionName = $_GET['name'];
 
-                // Retrieve the auction details
-                $auctionStmt = $pdo->prepare('SELECT * FROM auctions WHERE auction_name = :auctionName');
-                $auctionStmt->execute(['auctionName' => $auctionName]);
-                $auction = $auctionStmt->fetch(PDO::FETCH_ASSOC);
+        // Retrieve the auction details
+        $auctionStmt = $pdo->prepare('SELECT * FROM auctions WHERE auction_name = :auctionName');
+        $auctionStmt->execute(['auctionName' => $auctionName]);
+        $auction = $auctionStmt->fetch(PDO::FETCH_ASSOC);
 
-                if ($auction) {
-                    // Display the edit auction form
-                    echo '<form action="editauction.php" method="POST">';
-                    echo '<input type="hidden" name="auction_name" value="' . $auctionName . '" />';
-                    
-                    echo '<div class="form-group">';
-                    echo '<label for="new_name">New Name:</label><br>';
-                    echo '<input type="text" name="new_name" value="' . $auction['auction_name'] . '" class="form-input" /><br>';
-                    echo '</div>';
-                    
-                    echo '<div class="form-group">';
-                    echo '<label for="new_category">New Category:</label><br>';
-                    echo '<select name="new_category" class="form-input">';
-                    $categoriesStmt = $pdo->query('SELECT categoryName FROM categories');
-                    foreach ($categoriesStmt as $category) {
-                        $selected = ($auction['categoryID'] === $category['categoryName']) ? 'selected' : '';
-                        echo '<option value="' . $category['categoryName'] . '" ' . $selected . '>' . $category['categoryName'] . '</option>';
-                    }
-                    echo '</select><br>';
-                    echo '</div>';
-                    
-                    echo '<label for="new_description">New Description:</label><br>';
-                    echo '<textarea name="new_description" rows="4" cols="50" class="form-textarea">' . $auction['Description'] . '</textarea><br>';
-                    echo '<input type="submit" value="Update Details" class="button" />';
-                    echo '</form>';
+        if ($auction) {
+            // Display the edit auction form
+            echo '<form action="editauction.php" method="POST">';
+            echo '<input type="hidden" name="auction_name" value="' . $auctionName . '" />';
+            
+            echo '<div class="form-group">';
+            echo '<label for="new_name">New Name:</label><br>';
+            echo '<input type="text" name="new_name" value="' . $auction['auction_name'] . '" class="form-input" /><br>';
+            echo '</div>';
+            
+            echo '<div class="form-group">';
+            echo '<label for="new_category">New Category:</label><br>';
+            echo '<select name="new_category" class="form-input">';
+            $categoriesStmt = $pdo->query('SELECT categoryName FROM categories');
+            foreach ($categoriesStmt as $category) {
+                $selected = ($auction['categoryID'] === $category['categoryName']) ? 'selected' : '';
+                echo '<option value="' . $category['categoryName'] . '" ' . $selected . '>' . $category['categoryName'] . '</option>';
+            }
+            echo '</select><br>';
+            echo '</div>';
+            
+            // Input fields for auctionDate and auction_end_time
+            echo '<div class="form-group">';
+            echo '<label for="new_auctionDate">New Auction Date:</label><br>';
+            echo '<input type="datetime-local" name="new_auctionDate" value="' . $auction['auctionDate'] . '" class="form-input" /><br>';
+            echo '</div>';
+            
+            echo '<div class="form-group">';
+            echo '<label for="new_auction_end_time">New Auction End Time:</label><br>';
+            echo '<input type="datetime-local" name="new_auction_end_time" value="' . $auction['auction_end_time'] . '" class="form-input" /><br>';
+            echo '</div>';
+            
+            echo '<label for="new_description">New Description:</label><br>';
+            echo '<textarea name="new_description" rows="4" cols="50" class="form-textarea">' . $auction['Description'] . '</textarea><br>';
+            echo '<input type="submit" value="Update Details" class="button" />';
+            echo '</form>';
                 } else {
                     echo '<p>Auction not found.</p>';
                 }

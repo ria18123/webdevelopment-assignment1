@@ -124,6 +124,13 @@ $categories = $stmt->fetchAll();
     a, a:visited {
         color: white;
     }
+
+    .auctions a {
+  float: right;
+  clear: both;
+  margin-left: -179px;
+  margin-right: 51px;
+}
 </style>
 
 </head>
@@ -144,9 +151,9 @@ $categories = $stmt->fetchAll();
     <nav>
         <ul>
             <!-- Links to various sections -->
-            <li><a href="admin_panel.php">Home</a></li>
-            <li><a href="Auctions.php">Auctions</a></li>
+            <li><a href="admin_panel.php">Admin Dashboard</a></li>
             <li><a href="categories.php">Categories</a></li>
+            <li><a href="Auctions.php">Auctions</a></li>
         </ul>
     </nav>
     
@@ -159,8 +166,8 @@ $categories = $stmt->fetchAll();
         <section class="left">
             <ul>
                 <!-- Links to Auctions and Categories sections -->
-                <li><a href="Auctions.php">Auctions</a></li>
                 <li><a href="categories.php">Categories</a></li>
+                <li><a href="Auctions.php">Auctions</a></li>
             </ul>
         </section>
         
@@ -182,20 +189,18 @@ $categories = $stmt->fetchAll();
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Loop through categories array using PHP -->
-                    <?php foreach ($categories as $category) : ?>
-                        <tr>
-                            <!-- Display category name -->
-                            <td><?php echo $category['categoryName']; ?></td>
-                            <td class="actions-cell">
-                                <!-- Edit Category button with link to edit_category_form.php -->
-                                <a class="button" href="edit_category_form.php?name=<?php echo urlencode($category['categoryName']); ?>">Edit Category</a>
-                                <!-- Delete Category button with link to delete_category.php -->
-                                <a class="button" href="delete_category.php?name=<?php echo urlencode($category['categoryName']); ?>">Delete Category</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
+    <!-- Loop through categories array using PHP -->
+    <?php foreach ($categories as $category) : ?>
+        <tr>
+            <!-- Display category name -->
+            <td><?php echo $category['categoryName']; ?></td>
+            <td class="actions-cell">
+                <!-- Delete Category button with link to delete_category.php -->
+                <a class="button" href="delete_category.php?category=<?php echo urlencode($category['categoryName']); ?>">Delete Category</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
             </table>
         </section>
     </main>

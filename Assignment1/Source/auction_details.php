@@ -24,74 +24,101 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>ibuy Auctions</title>
-    <link rel="stylesheet" href="ibuy.css" />
-</head>
-<style>
-    /* Basic styles for dropdown menu */
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
+	<head>
+		<title>ibuy Auctions</title>
+		<link rel="stylesheet" href="ibuy.css" />
+	</head>
+    <style>
+        /* Basic styles for dropdown menu */
+/* Basic styles for dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    max-width: 250px; /* Adjust the width as needed */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-    .bid {
-            margin-top: 20px; /* Add margin to separate bid form from reviews */
+/* Rest of your existing CSS styles */
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
-        .reviews {
-            margin-top: 50px; /* Add margin to separate reviews from other content */
-        }
-</style>
-<body>
-    <header>
-        <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
+        header form input[type=submit] {
+	background-color: #005d96;
+	color: white;
+	width: 20%;
+	font-size: 2em;
+	padding: 0.5em;
+	cursor: pointer;
+	border: 0;
+}
+header form input[type="text"] {
+  border: 2px solid black;
+  font-size: 2em;
+  padding: 0.45em;
+  width: 70%;
+}
+  /* Additional styling for dropdown menu */
+.dropdown-content li {
+        padding: 8px;
+    }
+    </style>
+	<body>
+		<header>
+			<h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
 
-        <form action="#">
-            <input type="text" name="search" placeholder="Search for anything" />
-            <input type="submit" name="submit" value="Search" />
-        </form>
-    </header>
+			<form action="#">
+				<input type="text" name="search" placeholder="Search for anything" />
+				<input type="submit" name="submit" value="Search" />
+			</form>
+		</header>
 
-    <nav>
-        <ul>
-            <!-- Dropdown for categories -->
-            <li class="dropdown">
-                <a href="#" class="categoryLink">Categories</a>
-                <ul class="dropdown-content">
-                    <?php
-                    // Fetch categories from the database
-                    $categoriesQuery = "SELECT categoryName FROM categories";
-                    $categoriesResult = $pdo->query($categoriesQuery);
+        <nav>
+    <ul>
+        <!-- Dropdown for categories -->
+        <li><a class="categoryLink" href="user_dashboard.php">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="categoryLink">Categories</a>
+            <ul class="dropdown-content">
+                <?php
+                // Fetch categories from the database
+                $categoriesQuery = "SELECT categoryName FROM categories";
+                $categoriesResult = $pdo->query($categoriesQuery);
+                $categoriesCount = 0; // Initialize a counter
 
-                    // Loop through the categories and generate dropdown items
-                    while ($category = $categoriesResult->fetch(PDO::FETCH_ASSOC)) {
-                        echo '<li><a href="#">' . $category['categoryName'] . '</a></li>';
+                // Loop through the categories and generate dropdown items
+                while ($category = $categoriesResult->fetch(PDO::FETCH_ASSOC)) {
+                    // Show only a certain number of categories
+                    if ($categoriesCount < 5) {
+                        echo '<li><a href="category_auctions.php?category=' . $category['categoryName'] . '">' . $category['categoryName'] . '</a></li>';
+                        $categoriesCount++;
+                    } else {
+                        break; // Stop looping after a certain number of categories
                     }
-                    ?>
-                </ul>
-            </li>
+                }
+
+                // Add a "More" option that redirects to a separate page with all categories
+                echo '<li><a href="all_categories.php">More</a></li>';
+                ?>
+            </ul>
+        </li>
+
             <!-- Other navigation links -->
-            <li><a class="categoryLink" href="user_dashboard.php">Home</a></li>
-            <li><a class="categoryLink" href="#">Latest listings</a></li>
-            <li><a class="categoryLink" href="#">Search Results</a></li>
-            <li><a class="categoryLink" href="register.php">Register</a></li>
-            <li><a class="categoryLink" href="category.php">Category listings</a></li>
-            <li><a class="categoryLink" href="Auction.php">Auction</a></li>
-            <li><a class="categoryLink" href="login.php">Login</a></li>
+            <li><a class="categoryLink" href="user_auctions.php">Your Auctions</a></li>
+            <li><a class="categoryLink" href="post_auction.php">Post Auction</a></li>
+            <li><a class="categoryLink" href="\Admin\adminlogin.php">Admin</a></li>
+            <li><a class="categoryLink" href="logout.php">Logout</a></li>
         </ul>
     </nav>
+
+    <img src="banners/1.jpg" alt="Banner" />
 
     <main>
     <?php
@@ -109,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
                     echo '<img src="product.png" alt="' . $auction['auction_name'] . '">';
                     echo '<section class="details">';
                     echo '<h2>' . htmlspecialchars($auction['auction_name']) . '</h2>';
-                    echo '<h3>' . getCategoryName($auction['categoryID'], $pdo) . '</h3>';
+                    echo '<h3>' . getCategoryName($auction['categoryName'], $pdo) . '</h3>';
 
                     // Use the getCurrentBidAmount function to display the current bid
                     $currentBid = getCurrentBidAmount($auction['auction_name'], $pdo);
@@ -160,35 +187,37 @@ echo '</ul>';
             // Handle database errors gracefully
             echo "Error: " . $e->getMessage();
         }
-        // Function to fetch category name based on categoryID
-        function getCategoryName($categoryID, $pdo) {
-            $query = "SELECT categoryName FROM categories WHERE categoryName = :categoryID";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':categoryID', $categoryID, PDO::PARAM_STR);
-            $stmt->execute();
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result['categoryName'];
-        }
+// Modify the getCategoryName function to return the category name or a default value
+function getCategoryName($categoryID, $pdo) {
+    $query = "SELECT categoryName FROM categories WHERE categoryName = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$categoryID]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($result) {
+        return $result['categoryName'];
+    } else {
+        return 'Unknown Category'; // Return a default value if category is not found
+    }
+}
 
-        // Function to fetch the current bid amount for an auction
-        function getCurrentBidAmount($auctionName, $pdo) {
-            $query = "SELECT MAX(bidAmount) AS currentBid FROM bids WHERE auction_name = ?";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute([$auctionName]);
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-            if ($result['currentBid'] !== null) {
-                return number_format($result['currentBid'], 2); // Format the bid amount
-            } else {
-                return 'No bids yet';
-            }
-        }
+// Modify the getCurrentBidAmount function to handle the case when there are no bids yet
+function getCurrentBidAmount($auctionName, $pdo) {
+    $query = "SELECT MAX(bidAmount) AS currentBid FROM bids WHERE auction_name = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$auctionName]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($result['currentBid'] !== null) {
+        return number_format($result['currentBid'], 2);
+    } else {
+        return 'No bids yet';
+    }
+}
         ?>
-    </main>
-
-    <footer>
-        <!-- Your footer content here -->
+            <footer>
         &copy; ibuy <?php echo date("Y"); ?> <!-- Display the current year dynamically -->
     </footer>
+    </main>
 </body>
 </html>

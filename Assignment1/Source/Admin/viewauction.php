@@ -162,9 +162,9 @@ if (isset($_GET['name'])) {
             <!-- ... (Navigation menu with links) ... -->
             <nav>
                 <ul>
-                    <li><a href="admin_panel.php">Home</a></li>
-                    <li><a href="/">Auctions</a></li>
+                    <li><a href="admin_panel.php">Admin Dashboard</a></li>
                     <li><a href="categories.php">Categories</a></li>
+                    <li><a href="Auctions.php">Auctions</a></li>>
                 </ul>
             </nav>
             <!-- Main content with sidebar -->
@@ -183,9 +183,10 @@ if (isset($_GET['name'])) {
                 </section>
                 <section class="right">
                     <h2>' . $auction['auction_name'] . '</h2>
-                    <p>Category: ' . $auction['categoryID'] . '</p>
+                    <p>Category: ' . $auction['categoryName'] . '</p>
                     <p>Auctioneer: ' . $auction['auctioneer'] . '</p>
                     <p>Auction Date: ' . $auction['auctionDate'] . '</p>
+                    <p>Auction Date: ' . $auction['auction_end_time'] . '</p>
                     <p>Description: ' . $auction['Description'] . '</p>
 
                     <!-- Delete button as a vertical button -->
