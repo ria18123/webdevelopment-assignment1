@@ -1,8 +1,9 @@
 <?php
 // deleteauction.php
-require('../dataconnection/configuration.php');
+require('../dataconnection/configuration.php');// Include the database configuration file to establish a connection
 
 if (isset($_GET['name'])) {
+    // Get the auction name from the query parameter
     $auctionName = $_GET['name'];
 
     // Delete bids associated with the auction

@@ -1,38 +1,47 @@
 <?php
-require('../dataconnection/configuration.php');
+require('../dataconnection/configuration.php'); // Including the database configuration file to establish a connection.
 
-$message = '';
+$message = ''; // Initialize a variable to store status messages.
 
+// Check if the request method is POST (form submission).
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $categoryName = $_POST['categoryName'];
+    $categoryName = $_POST['categoryName']; // Get the submitted category name from the form.
 
+    // SQL query to check if the category name already exists in the database.
     $sqlCheck = "SELECT COUNT(*) FROM categories WHERE categoryName = ?";
-    $stmtCheck = $pdo->prepare($sqlCheck);
-    $stmtCheck->execute([$categoryName]);
-    $categoryCount = $stmtCheck->fetchColumn();
+    $stmtCheck = $pdo->prepare($sqlCheck); // Prepare the query.
+    $stmtCheck->execute([$categoryName]); // Execute the query with the category name as parameter.
+    $categoryCount = $stmtCheck->fetchColumn(); // Fetch the count result.
 
+    // Check if the category name already exists.
     if ($categoryCount > 0) {
-        $message = 'Category already exists';
+        $message = 'Category already exists'; // Set a message indicating that the category already exists.
     } else {
+        // SQL query to insert the new category name into the database.
         $sqlInsert = "INSERT INTO categories (categoryName) VALUES (?)";
-        $stmtInsert = $pdo->prepare($sqlInsert);
-        $stmtInsert->execute([$categoryName]);
+        $stmtInsert = $pdo->prepare($sqlInsert); // Prepare the query.
+        $stmtInsert->execute([$categoryName]); // Execute the query with the category name as parameter.
 
-        $message = 'Category added successfully';
+        $message = 'Category added successfully'; // Set a message indicating successful category addition.
     }
 }
 ?>
 
+<!-- The body content goes here -->
 <!DOCTYPE html>
 <html>
+     <!-- Head section containing metadata and external resources -->
 <head>
+        <!-- The title of the page -->
     <title>Add Category</title>
+      <!-- Link to external stylesheets -->
     <link rel="stylesheet" href="/ibuy.css" />
     <link rel="stylesheet" href="/styles.css" />
-    <!-- Add your additional CSS styles here if needed -->
+  <!-- Adding the additional CSS for this page only -->
     <style>
-                /* Add your additional CSS styles here if needed */
-                header form input[type=submit] {
+         /* CSS styles for the header form */       
+        header form input[type=submit] {
+             /* Button styling */
             background-color: #005d96;
             color: white;
             width: 20%;
@@ -42,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: 0;
         }
         header form input[type="text"] {
+             /* Text input styling */
             border: 2px solid black;
             font-size: 2em;
             padding: 0.45em;
@@ -69,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 2vw;
         }
   
-    /* Adjust the styles for the buttons */
+     /* Adjusted styles for buttons */
     .button {
         display: inline-block;
         padding: 8px 25px; /* Adjust padding for the buttons */
@@ -89,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #45a049;
         }
 
-/* Button style */
+ /* Additional button style */
 .button {
     display: inline-block;
     padding: 8px 15px; /* Adjust padding for the buttons */
@@ -104,11 +114,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .button:hover {
     background-color: #5aa0c2;
 }
-* Additional styles for alignment */
+/* Additional styles for alignment  */
         .form-group {
             margin-bottom: 20px;
         }
         main form input[type="submit"] {
+            /* Button styling within the main content */
             background-color: #4CAF50;
             color: white;
             flex-grow: 0;
@@ -138,47 +149,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-<header>
-    <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
-    <form action="#">
-        <input type="text" name="search" placeholder="Search for anything" />
-        <input type="submit" name="submit" value="Search" />
-    </form>
-</header>
-<nav>
-    <ul>
-        <li><a href="admin_panel.php">Home</a></li>
-        <li><a href="/">Auctions</a></li>
-        <li><a href="categories.php">Categories</a></li>
-    </ul>
-</nav>
-<img src="/banners/1.jpg" alt="Banner" />
-
-<main class="sidebar">
-    <section class="left">
-        <ul>
-            <li><a href="addauction.php">Add Auction</a></li>
-            <li><a href="editauction.php">Edit Auction</a></li>
-            <li><a href="deleteauction.php">Delete Auction</a></li>
-        </ul>
-    </section>
-    <section class="right">
-        <h2>Add Category</h2>
-        <?php if (!empty($message)) : ?>
-            <div class="message"><?= $message ?></div>
-        <?php endif; ?>
-        <form action="add_category.php" method="POST">
-            <div class="form-group">
-                <label for="categoryName">Category Name:</label>
-                <input type="text" name="categoryName" required><br>
-            </div>
-            <input type="submit" value="Add Category" class="button" />
+    <!-- Header section with the website logo and search form -->
+    <header>
+        <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
+        <form action="#">
+            <input type="text" name="search" placeholder="Search for anything" />
+            <input type="submit" name="submit" value="Search" />
         </form>
-    </section>
-</main>
+    </header>
+    <!-- Navigation section with links to different pages -->
+    <nav>
+        <ul>
+            <li><a href="admin_panel.php">Home</a></li>
+            <li><a href="/">Auctions</a></li>
+            <li><a href="categories.php">Categories</a></li>
+        </ul>
+    </nav>
+    <!-- Banner image -->
+    <img src="/banners/1.jpg" alt="Banner" />
 
-<footer>
+    <!-- Main content section with sidebar -->
+    <main class="sidebar">
+        <!-- Left sidebar section with navigation links -->
+        <section class="left">
+            <!-- Sidebar navigation links -->
+            <ul>
+                <li><a href="addauction.php">Add Auction</a></li>
+                <li><a href="editauction.php">Edit Auction</a></li>
+                <li><a href="deleteauction.php">Delete Auction</a></li>
+            </ul>
+        </section>
+        <!-- Right sidebar section for adding categories -->
+        <section class="right">
+            <h2>Add Category</h2>
+            <?php if (!empty($message)) : ?>
+                <div class="message"><?= $message ?></div>
+            <?php endif; ?>
+            <!-- Form for adding a new category -->
+            <form action="add_category.php" method="POST">
+                <div class="form-group">
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" name="categoryName" required><br>
+                </div>
+                <!-- Submit button for adding the category -->
+                <input type="submit" value="Add Category" class="button" />
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer section with copyright information -->
+    <footer>
         &copy; ibuy <?php echo date("Y"); ?> <!-- Display the current year dynamically -->
     </footer>
 </body>
-</html>

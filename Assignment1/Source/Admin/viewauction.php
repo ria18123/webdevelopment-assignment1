@@ -1,8 +1,9 @@
 <?php
 // viewauction.php
-require('../dataconnection/configuration.php');
+require('../dataconnection/configuration.php'); // Include the database configuration file to establish a connection
 
 if (isset($_GET['name'])) {
+    // Get the auction name from the query parameter
     $auctionName = $_GET['name'];
 
     // Fetch auction details from the database
@@ -11,6 +12,7 @@ if (isset($_GET['name'])) {
     $auction = $auctionStmt->fetch(PDO::FETCH_ASSOC);
 
     if ($auction) {
+        // Start of HTML content
         echo '<!DOCTYPE html>
         <head>
             <title>View Auction</title>
@@ -147,7 +149,9 @@ if (isset($_GET['name'])) {
             }
             </style>
         </head>
+        <!-- Header with search form -->
         <body>
+        <!-- ... (Header content with search form) ... -->
             <header>
                 <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
                 <form action="#">
@@ -155,6 +159,7 @@ if (isset($_GET['name'])) {
                     <input type="submit" name="submit" value="Search" />
                 </form>
             </header>
+            <!-- ... (Navigation menu with links) ... -->
             <nav>
                 <ul>
                     <li><a href="admin_panel.php">Home</a></li>
@@ -162,9 +167,10 @@ if (isset($_GET['name'])) {
                     <li><a href="categories.php">Categories</a></li>
                 </ul>
             </nav>
-
+            <!-- Main content with sidebar -->
             <main class="sidebar">
                 <section class="left">
+                <!-- Sidebar navigation links -->
                     <ul>
                     <li><a href="Auctions.php">Auctions</a></li>
                     <li><a href="categories.php">Categories</a></li>
@@ -187,7 +193,7 @@ if (isset($_GET['name'])) {
                         <a class="button" href="deleteauction.php?name=' . $auction['auction_name'] . '">Delete Auction</a>
                     </div>
 
-                    <!-- Add some space -->
+                    <!-- Space for separation -->
                     <div style="margin-top: 10px;"></div>
 
                     <div class="action-buttons">

@@ -1,8 +1,11 @@
 <?php
 // viewauction.php
+
+// Include the database configuration file to establish a connection
 require('../dataconnection/configuration.php');
 
 if (isset($_GET['name'])) {
+    // Get the auction name from the query parameter
     $auctionName = $_GET['name'];
 
     // Fetch auction details from the database
@@ -16,10 +19,11 @@ if (isset($_GET['name'])) {
     $bidders = $bidStmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($auction) {
+        // Start of HTML content
         echo '
         <!DOCTYPE html>
         <head>
-            <title>View Auction</title>
+            <title>View Bidder</title>
             <link rel="stylesheet" href="/ibuy.css" />
             <link rel="stylesheet" href="/styles.css" />
             <style>
@@ -155,6 +159,7 @@ a, a:visited {
             </style>
         </head>
         <body>
+        <!-- Header with search form -->
         <header>
         <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
         <form action="#">
@@ -162,6 +167,7 @@ a, a:visited {
             <input type="submit" name="submit" value="Search" />
         </form>
     </header>
+    <!-- Navigation menu -->
     <nav>
         <ul>
             <li><a href="admin_panel.php">Home</a></li>
@@ -169,15 +175,18 @@ a, a:visited {
             <li><a href="categories.php">Categories</a></li>
         </ul>
     </nav>
-
+    <!-- Main content with sidebar -->
     <main class="sidebar">
     <section class="left">
+    <!-- Sidebar navigation links -->
         <ul>
+        <!-- ... (Sidebar links) ... -->
         <li><a href="Auctions.php">Auctions</a></li>
         <li><a href="categories.php">Categories</a></li>
         </ul>
     </section>
     <section class="right">
+    <!-- Auction details and bidders table -->
         <h1>View Bidders - ' . $auctionName . '</h1>
         <p>Auctioneer: ' . $auction['auctioneer'] . '</p>
         <table>
@@ -185,6 +194,7 @@ a, a:visited {
                 <th style="text-align: center;">Bid Amount</th>
                 <th style="text-align: center;">Bidder Email</th>
             </tr>';
+            // Iterate through each bidder and display their information
 foreach ($bidders as $bidder) {
 echo '<tr>
             <td style="text-align: center;">' . $bidder['bidAmount'] . '</td>
@@ -198,6 +208,7 @@ echo '</table>
         </div>
     </section>
 </main>
+<!-- Footer with dynamic year display -->
 <footer>
 &copy; ibuy <?php echo date("Y"); ?> <!-- Display the current year dynamically -->
 </footer>

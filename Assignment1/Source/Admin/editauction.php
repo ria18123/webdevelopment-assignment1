@@ -1,5 +1,5 @@
 <?php
-require('../dataconnection/configuration.php');
+require('../dataconnection/configuration.php'); // Include the database configuration file to establish a connection
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,91 +24,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 
+<!-- The body content goes here -->
 <!DOCTYPE html>
 <html>
+<!-- Head section containing metadata and external resources -->
 <head>
-    <title>Edit Auction</title>
+        <!-- The title of the page -->
+    <title>Edit Auctions</title>
+      <!-- Link to external stylesheets -->
     <link rel="stylesheet" href="/ibuy.css" />
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Add your additional CSS styles here if needed -->
     <style>
-        /* Add your additional CSS styles here if needed */
-        header form input[type=submit] {
-            background-color: #005d96;
-            color: white;
-            width: 20%;
-            font-size: 2em;
-            padding: 0.5em;
-            cursor: pointer;
-            border: 0;
-        }
-        header form input[type="text"] {
-            border: 2px solid black;
-            font-size: 2em;
-            padding: 0.45em;
-            width: 70%;
-        }
-        
-        /* Style for the sidebar */
-        .sidebar {
-            align-items: center;
-            padding: 0;
-            margin-top: 2vw;
-        }
-        .sidebar .left {
-            width: 20%;
-            background-color: #555;
-            padding: 10px;
-            list-style-type: none;
-        }
-        .sidebar .right {
-            flex: 1;
-            padding: 20px;
-            
-        }
-        footer {
-            margin-top: 2vw;
-        }
-  /* Table style */
-  table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        table th,
-        table td {
-            padding: 8px;
-            border: 1px solid #ccc;
-        }
-        
-        .description-cell {
-            max-width: 300px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .actions-cell {
-            white-space: nowrap;
-        }
-        .actions-cell .button {
-        width: auto;
-        padding: 0.5em 1em;
-        margin-bottom: 10px; /* Add margin between buttons */
+    /* Add your additional CSS styles here if needed */
+
+    /* Styling for search form submit button */
+    header form input[type=submit] {
+        background-color: #005d96;
+        color: white;
+        width: 20%;
+        font-size: 2em;
+        padding: 0.5em;
+        cursor: pointer;
+        border: 0;
     }
-        
-        /* Button style */
-        .button {
-            display: inline-block;
-            padding: 8px 25px;
-            background-color: #4CAF50;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            border: none;
-        }
-        
-    /* Adjust the styles for the buttons */
+
+    /* Styling for search form text input */
+    header form input[type="text"] {
+        border: 2px solid black;
+        font-size: 2em;
+        padding: 0.45em;
+        width: 70%;
+    }
+
+    /* Style for the sidebar */
+    .sidebar {
+        align-items: center;
+        padding: 0;
+        margin-top: 2vw;
+    }
+
+    /* Left sidebar styling */
+    .sidebar .left {
+        width: 20%;
+        background-color: #555;
+        padding: 10px;
+        list-style-type: none;
+    }
+
+    /* Right content section styling */
+    .sidebar .right {
+        flex: 1;
+        padding: 20px;
+    }
+
+    /* Styling for footer */
+    footer {
+        margin-top: 2vw;
+    }
+
+    /* Table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    /* Styling for table headers and cells */
+    table th,
+    table td {
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+
+    /* Styling for cells with descriptions */
+    .description-cell {
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Styling for cells with actions */
+    .actions-cell {
+        white-space: nowrap;
+    }
+
+    /* Button styles */
+    .button {
+        display: inline-block;
+        padding: 8px 25px;
+        background-color: #4CAF50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+    }
+
+    /* Adjusted button styles */
     .button {
         display: inline-block;
         padding: 8px 25px; /* Adjust padding for the buttons */
@@ -122,103 +135,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         text-align: center;
         line-height: 20px; /* Center text vertically */
     }
-        
-        /* Hover effect for buttons */
-        .button:hover {
-            background-color: #45a049;
-        }
-/* Table style */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
-table th,
-table td {
-    padding: 8px;
-    border: 1px solid #ccc;
-}
+    /* Hover effect for buttons */
+    .button:hover {
+        background-color: #45a049;
+    }
 
-.description-cell {
-    max-width: 300px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    /* Additional styles for alignment */
+    .form-label {
+        display: block;
+        margin-top: 10px;
+    }
 
-.actions-cell {
-    width: 150px; /* Decrease the width of the actions column */
-    white-space: nowrap;
-}
+    .form-input {
+        padding: 5px;
+        margin-top: 5px;
+        border: 2px solid black;
+    }
 
-/* Button style */
-.button {
-    display: inline-block;
-    padding: 8px 15px; /* Adjust padding for the buttons */
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    border: none;
-}
+    .form-textarea {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        border: 2px solid black;
+    }
 
-/* Hover effect for buttons */
-.button:hover {
-    background-color: #5aa0c2;
-}
-        /* Additional styles for alignment */
-        .form-label {
-            display: block;
-            margin-top: 10px;
-        }
-        .form-input {
-            padding: 5px;
-            margin-top: 5px;
-            border: 2px solid black;
-        }
-        .form-textarea {
-            width: 100%;
-            padding: 5px;
-            margin-top: 5px;
-            border: 2px solid black;
-        }
-        .form-group {
-    margin-bottom: 20px; /* Add desired spacing between the input boxes */
-}
-main form input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  flex-grow: 0;
-  margin-left: 31px;
-  font-size: 1.2em;
-  padding: 0.2em;
-  cursor: pointer;
-  border: 0;
-  height: 47px;
-  margin-top: 35px;
-}
-/* Button style */
-.button {
-    display: inline-block;
-    padding: 8px 15px; /* Adjust padding for the buttons */
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    border: none;
-}
+    .form-group {
+        margin-bottom: 20px; /* Add desired spacing between the input boxes */
+    }
 
-/* Hover effect for buttons */
-.button:hover {
-    background-color: #45a049;
-}
-a, a:visited {
-  color: white;
-}
-    </style>
+    /* Styling for form submit button in main content */
+    main form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        flex-grow: 0;
+        margin-left: 31px;
+        font-size: 1.2em;
+        padding: 0.2em;
+        cursor: pointer;
+        border: 0;
+        height: 47px;
+        margin-top: 35px;
+    }
+
+    /* Button styles */
+    .button {
+        display: inline-block;
+        padding: 8px 15px; /* Adjust padding for the buttons */
+        background-color: #4CAF50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+    }
+
+    /* Hover effect for buttons */
+    .button:hover {
+        background-color: #45a049;
+    }
+
+    /* Styling for hyperlinks and visited links */
+    a, a:visited {
+        color: white;
+    }
+</style>
+
 </head>
 <body>
+    <!-- Header section -->
     <header>
         <h1><span class="i">i</span><span class="b">b</span><span class="u">u</span><span class="y">y</span></h1>
         <form action="#">
@@ -226,6 +210,8 @@ a, a:visited {
             <input type="submit" name="submit" value="Search" />
         </form>
     </header>
+    
+    <!-- Navigation section -->
     <nav>
         <ul>
             <li><a href="admin_panel.php">Home</a></li>
@@ -233,59 +219,68 @@ a, a:visited {
             <li><a href="categories.php">Categories</a></li>
         </ul>
     </nav>
+    
+    <!-- Banner image -->
     <img src="/banners/1.jpg" alt="Banner" />
 
+    <!-- Main content section with sidebar -->
     <main class="sidebar">
-    <section class="left">
-        <ul>
-        <li><a href="Auctions.php">Auctions</a></li>
-        <li><a href="categories.php">Categories</a></li>
-        </ul>
-    </section>
-    <section class="right">
-    <h2>Edit Auction</h2>
-    <?php
-    if (isset($_GET['name'])) {
-        $auctionName = $_GET['name'];
+        <!-- Left sidebar section -->
+        <section class="left">
+            <ul>
+                <li><a href="Auctions.php">Auctions</a></li>
+                <li><a href="categories.php">Categories</a></li>
+            </ul>
+        </section>
+        
+        <!-- Right content section -->
+        <section class="right">
+            <h2>Edit Auction</h2>
+            <?php
+            if (isset($_GET['name'])) {
+                $auctionName = $_GET['name'];
 
-        // Retrieve the auction details
-        $auctionStmt = $pdo->prepare('SELECT * FROM auctions WHERE auction_name = :auctionName');
-        $auctionStmt->execute(['auctionName' => $auctionName]);
-        $auction = $auctionStmt->fetch(PDO::FETCH_ASSOC);
+                // Retrieve the auction details
+                $auctionStmt = $pdo->prepare('SELECT * FROM auctions WHERE auction_name = :auctionName');
+                $auctionStmt->execute(['auctionName' => $auctionName]);
+                $auction = $auctionStmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($auction) {
-            echo '<form action="editauction.php" method="POST">';
-            echo '<input type="hidden" name="auction_name" value="' . $auctionName . '" />';
-            
-            echo '<div class="form-group">';
-            echo '<label for="new_name">New Name:</label><br>';
-            echo '<input type="text" name="new_name" value="' . $auction['auction_name'] . '" class="form-input" /><br>';
-            echo '</div>';
-            
-            echo '<div class="form-group">';
-            echo '<label for="new_category">New Category:</label><br>';
-            echo '<select name="new_category" class="form-input">';
-            $categoriesStmt = $pdo->query('SELECT categoryName FROM categories');
-            foreach ($categoriesStmt as $category) {
-                $selected = ($auction['categoryID'] === $category['categoryName']) ? 'selected' : '';
-                echo '<option value="' . $category['categoryName'] . '" ' . $selected . '>' . $category['categoryName'] . '</option>';
+                if ($auction) {
+                    // Display the edit auction form
+                    echo '<form action="editauction.php" method="POST">';
+                    echo '<input type="hidden" name="auction_name" value="' . $auctionName . '" />';
+                    
+                    echo '<div class="form-group">';
+                    echo '<label for="new_name">New Name:</label><br>';
+                    echo '<input type="text" name="new_name" value="' . $auction['auction_name'] . '" class="form-input" /><br>';
+                    echo '</div>';
+                    
+                    echo '<div class="form-group">';
+                    echo '<label for="new_category">New Category:</label><br>';
+                    echo '<select name="new_category" class="form-input">';
+                    $categoriesStmt = $pdo->query('SELECT categoryName FROM categories');
+                    foreach ($categoriesStmt as $category) {
+                        $selected = ($auction['categoryID'] === $category['categoryName']) ? 'selected' : '';
+                        echo '<option value="' . $category['categoryName'] . '" ' . $selected . '>' . $category['categoryName'] . '</option>';
+                    }
+                    echo '</select><br>';
+                    echo '</div>';
+                    
+                    echo '<label for="new_description">New Description:</label><br>';
+                    echo '<textarea name="new_description" rows="4" cols="50" class="form-textarea">' . $auction['Description'] . '</textarea><br>';
+                    echo '<input type="submit" value="Update Details" class="button" />';
+                    echo '</form>';
+                } else {
+                    echo '<p>Auction not found.</p>';
+                }
+            } else {
+                echo '<p>No auction selected.</p>';
             }
-            echo '</select><br>';
-            echo '</div>';
-            
-            echo '<label for="new_description">New Description:</label><br>';
-            echo '<textarea name="new_description" rows="4" cols="50" class="form-textarea">' . $auction['Description'] . '</textarea><br>';
-            echo '<input type="submit" value="Update Details" class="button" />';
-            echo '</form>';
-        } else {
-            echo '<p>Auction not found.</p>';
-        }
-    } else {
-        echo '<p>No auction selected.</p>';
-    }
-    ?>
-</section>
+            ?>
+        </section>
     </main>
+    
+    <!-- Footer section -->
     <footer>
         &copy; ibuy <?php echo date("Y"); ?> <!-- Display the current year dynamically -->
     </footer>
